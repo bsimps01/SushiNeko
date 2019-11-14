@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B59DB0D237B9CA80031FF61 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B59DB0C237B9CA80031FF61 /* Character.swift */; };
+		1B59DB0F237D000B0031FF61 /* AnimationActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1B59DB0E237D000B0031FF61 /* AnimationActions.sks */; };
 		1B9BF6EB2373A4B900B0E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BF6EA2373A4B900B0E6F4 /* AppDelegate.swift */; };
 		1B9BF6ED2373A4B900B0E6F4 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1B9BF6EC2373A4B900B0E6F4 /* GameScene.sks */; };
 		1B9BF6EF2373A4B900B0E6F4 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1B9BF6EE2373A4B900B0E6F4 /* Actions.sks */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		1B59DB0C237B9CA80031FF61 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		1B59DB0E237D000B0031FF61 /* AnimationActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AnimationActions.sks; sourceTree = "<group>"; };
 		1B9BF6E72373A4B900B0E6F4 /* SushiNeko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SushiNeko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9BF6EA2373A4B900B0E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B9BF6EC2373A4B900B0E6F4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 		1B9BF6DE2373A4B900B0E6F4 = {
 			isa = PBXGroup;
 			children = (
+				1B59DB0E237D000B0031FF61 /* AnimationActions.sks */,
 				1B9BF6E92373A4B900B0E6F4 /* SushiNeko */,
 				1B9BF6E82373A4B900B0E6F4 /* Products */,
 				1B9BF7022373A96700B0E6F4 /* assets.atlas */,
@@ -145,6 +148,7 @@
 			files = (
 				1B9BF6F62373A4B900B0E6F4 /* Main.storyboard in Resources */,
 				1B9BF6ED2373A4B900B0E6F4 /* GameScene.sks in Resources */,
+				1B59DB0F237D000B0031FF61 /* AnimationActions.sks in Resources */,
 				1B9BF7032373A96700B0E6F4 /* assets.atlas in Resources */,
 				1B9BF6F82373A4BE00B0E6F4 /* Assets.xcassets in Resources */,
 				1B9BF6FB2373A4BE00B0E6F4 /* LaunchScreen.storyboard in Resources */,

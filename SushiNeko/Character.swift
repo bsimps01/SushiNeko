@@ -10,7 +10,9 @@ import Foundation
 import SpriteKit
 
 class Character: SKSpriteNode {
-
+    
+    let punch = SKAction(named: "Punch")!
+    
     /* Character side */
     var side: Side = .left {
         didSet {
@@ -22,6 +24,7 @@ class Character: SKSpriteNode {
                 xScale = -1
                 position.x = 252
             }
+            /* Run the punch action */ run(punch)
         }
     }
 
@@ -29,7 +32,7 @@ class Character: SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
-
+    
     /* You are required to implement this for your subclass to work */
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
