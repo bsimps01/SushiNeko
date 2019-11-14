@@ -7,83 +7,87 @@
 //
 
 import SpriteKit
-import GameplayKit
 
+enum Side {
+    case left, right, none
+}
 class GameScene: SKScene {
+    /* Game objects */
+    var sushiBasePiece: SushiPiece!
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
-    
-    override func didMove(to view: SKView) {
+    override func didMove(to view: SKView){
+        super.didMove(to: view)
+
+        /* Connect game objects */
+        sushiBasePiece = childNode(withName: "sushiBasePiece") as! SushiPiece
+        /* Setup chopstick connections */
+        sushiBasePiece.connectChopsticks()
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        /* Sushi tower array */
+        var sushiTower: [SushiPiece] = []
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+    func addTowerPiece(side: Side) {
+           /* Add a new sushi piece to the sushi tower */
+
+           /* Copy original sushi piece */
+           let newPiece = sushiBasePiece.copy() as! SushiPiece
+           newPiece.connectChopsticks()
+
+           /* Access last piece properties */
+           let lastPiece = sushiTower.last
+
+           /* Add on top of last piece, default on first piece */
+           let lastPosition = lastPiece?.position ?? sushiBasePiece.position
+           newPiece.position.x = lastPosition.x
+           newPiece.position.y = lastPosition.y + 55
+
+           /* Increment Z to ensure it's on top of the last piece, default on first piece*/
+           let lastZPosition = lastPiece?.zPosition ?? sushiBasePiece.zPosition
+           newPiece.zPosition = lastZPosition + 1
+
+           /* Set side */
+           newPiece.side = side
+
+           /* Add sushi to scene */
+           addChild(newPiece)
+
+           /* Add sushi piece to the sushi tower */
+           sushiTower.append(newPiece)
+            /* Manually stack the start of the tower */
+            addTowerPiece(side: .none)
+            addTowerPiece(side: .right)
+    func addRandomPieces(total: Int) {
+          /* Add random sushi pieces to the sushi tower */
+
+          for _ in 1...total {
+
+              /* Need to access last piece properties */
+              let lastPiece = sushiTower.last!
+
+              /* Need to ensure we don't create impossible sushi structures */
+              if lastPiece.side != .none {
+                 addTowerPiece(side: .none)
+              } else {
+
+                 /* Random Number Generator */
+                 let rand = arc4random_uniform(100)
+
+                 if rand < 45 {
+                    /* 45% Chance of a left piece */
+                    addTowerPiece(side: .left)
+                 } else if rand < 90 {
+                    /* 45% Chance of a right piece */
+                    addTowerPiece(side: .right)
+                 } else {
+                    /* 10% Chance of an empty piece */
+                    addTowerPiece(side: .none)
+                    /* Randomize tower to just outside of the screen */
+                    addRandomPieces(total: 10)
+                 }
+              }
+          }
         }
-    }
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
         }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
 }
+
