@@ -79,13 +79,13 @@ class GameScene: SKScene {
             addRandomPieces(total: 1)
             /* Check character side against sushi piece side (this is our death collision check)*/
             if character.side == firstPiece.side {
-
+                gameOver()
                 /* No need to continue as player is dead */
                 return
             }
         }
         /* Increment Health */
-        health += 0.1
+        health += 0.3
         /* Increment Score */
         score += 1
     }
