@@ -21,4 +21,4 @@ Do you like Sushi? How about cats? Then you're in the right place! You are a cat
 - *Play button*
 - *Health Bar*
 
-![Alt text] (/Users/benjamin5311/dev/MakeSchool/SushiNeko/SUSHINEKOSS.png)
+![Alt text] (https://github.com/bsimps01/SushiNeko/blob/master/SUSHINEKOSS.png)
